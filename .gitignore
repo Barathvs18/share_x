@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.Python
+
+# Environment variables (DO NOT commit secrets)
+backend/.env
+.env
+
+# Uploads folder (user data)
+backend/uploads/
+
+# Build outputs
+frontend/dist/
+frontend/.vite/
+
+# Python cache
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+*.log
+npm-debug.log*
