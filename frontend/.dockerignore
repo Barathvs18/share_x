@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.vite/
+out.txt
+.git
+.gitignore
