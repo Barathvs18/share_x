@@ -2,8 +2,19 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes import user, files
 import uvicorn
+from contextlib import asynccontextmanager
+from database import client
 
-app = FastAPI(title="Secure File Sharing API")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        await client.admin.command('ping')
+        print("✅ Successfully connected to MongoDB!")
+    except Exception as e:
+        print(f"❌ Failed to connect to MongoDB: {e}")
+    yield
+
+app = FastAPI(title="Secure File Sharing API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

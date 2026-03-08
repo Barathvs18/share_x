@@ -27,6 +27,11 @@ export const getSharedFilesAPI = () => api.get('/files/shared');
 export const shareFileAPI = (data) => api.post('/files/share', data);
 export const revokeFileAPI = (data) => api.post('/files/revoke', data);
 export const verifyFileAPI = (data) => api.post('/files/verify', data);
+export const getMySharesAPI = () => api.get('/files/myshares');
+export const viewFileAPI = (fileId) => api.get(`/files/view/${fileId}`);
+export const deleteFileAPI = (fileId) => api.delete(`/files/delete/${fileId}`);
+export const getFileLogsAPI = (fileId) => api.get(`/files/logs/${fileId}`);
+export const getAllLogsAPI = () => api.get('/files/alllogs');
 
 // Download — returns a blob for browser download trigger
 export const downloadFileAPI = async (fileId, filename) => {

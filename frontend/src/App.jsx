@@ -8,6 +8,8 @@ import UploadFile from './pages/UploadFile';
 import ShareFile from './pages/ShareFile';
 import VerifyFile from './pages/VerifyFile';
 import SharedFiles from './pages/SharedFiles';
+import ViewFile from './pages/ViewFile';
+import ActivityLog from './pages/ActivityLog';
 
 function App() {
     return (
@@ -23,6 +25,8 @@ function App() {
                 <Route path="/shared" element={<SharedFiles />} />
                 <Route path="/share/:id" element={<ShareFile />} />
                 <Route path="/verify/:id?" element={<VerifyFile />} />
+                <Route path="/view/:id" element={<ViewFile />} />
+                <Route path="/activity" element={<ActivityLog />} />
             </Route>
 
             {/* 404 Catcher */}

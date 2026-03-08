@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Wallet, Bell, User } from 'lucide-react';
+import React from 'react';
+import { User } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -11,7 +11,6 @@ const PAGE_TITLES = {
 };
 
 const Navbar = () => {
-    const [address, setAddress] = useState('');
     const location = useLocation();
     const { user } = useAuth();
 
@@ -19,34 +18,6 @@ const Navbar = () => {
     const pageTitle = Object.entries(PAGE_TITLES).find(([path]) =>
         location.pathname.startsWith(path)
     )?.[1] || 'SecureShare';
-
-    useEffect(() => {
-        if (window.ethereum) {
-            window.ethereum.request({ method: 'eth_accounts' }).then(accounts => {
-                if (accounts.length > 0) setAddress(accounts[0]);
-            }).catch(() => { });
-            window.ethereum.on('accountsChanged', (accounts) => setAddress(accounts[0] || ''));
-        }
-        return () => {
-            if (window.ethereum?.removeListener) {
-                window.ethereum.removeListener('accountsChanged', () => { });
-            }
-        };
-    }, []);
-
-    const connectWallet = async () => {
-        if (!window.ethereum) return alert('MetaMask not found! Install it to use blockchain features.');
-        try {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            setAddress(accounts[0]);
-        } catch (error) {
-            console.error('Wallet connection failed', error);
-        }
-    };
-
-    const shortAddress = address
-        ? `${address.substring(0, 6)}...${address.substring(address.length - 4)}`
-        : '';
 
     return (
         <header className="top-navbar">
@@ -69,16 +40,6 @@ const Navbar = () => {
                         <User size={15} />
                         <span style={{ color: 'var(--text-main)', fontWeight: 500 }}>{user.username}</span>
                     </div>
-                )}
-                {address ? (
-                    <div className="wallet-badge">
-                        <Wallet size={16} />
-                        {shortAddress}
-                    </div>
-                ) : (
-                    <button className="btn btn-outline btn-sm" onClick={connectWallet}>
-                        <Wallet size={15} /> Connect Wallet
-                    </button>
                 )}
             </div>
         </header>

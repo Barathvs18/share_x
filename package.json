@@ -1,0 +1,16 @@
+{
+    "name": "secure-share-x",
+    "version": "1.0.0",
+    "description": "Secure File Share — Hardhat local blockchain setup",
+    "private": true,
+    "scripts": {
+        "chain": "npx hardhat node",
+        "deploy": "npx hardhat run scripts/deploy.js --network localhost",
+        "compile": "npx hardhat compile",
+        "clean": "npx hardhat clean"
+    },
+    "devDependencies": {
+        "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+        "hardhat": "^2.28.6"
+    }
+}

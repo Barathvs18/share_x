@@ -14,6 +14,7 @@ class ShareSchema(BaseModel):
     file_id: str
     shared_with_email: str
     expiry_time: int  # Unix timestamp (seconds)
+    can_download: bool = True  # False = view/verify only, no download
 
 class RevokeSchema(BaseModel):
     file_id: str

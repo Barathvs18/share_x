@@ -1,118 +1,119 @@
-# SecureShare X 🔐
+# 🔐 Secure Share X
 
-A **decentralized, blockchain-backed secure file sharing platform** built with FastAPI, React, and MongoDB Atlas. Files are hashed with SHA-256 and can optionally be anchored to the Polygon blockchain for immutable integrity verification.
-
----
-
-## 🏗️ Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18 + Vite + Framer Motion |
-| Backend | FastAPI + Uvicorn |
-| Database | MongoDB Atlas (via Motor async driver) |
-| Auth | JWT (python-jose + passlib) |
-| Blockchain | Solidity Smart Contract + Ethers.js + MetaMask |
-| Hashing | SHA-256 (Python hashlib) |
+Blockchain-powered secure file sharing — upload, share, revoke, and verify files locally.
 
 ---
 
-## 📁 Project Structure
+## ⚙️ Prerequisites
 
-```
-sceure_share_x/
-├── backend/
-│   ├── main.py           # FastAPI app entry point
-│   ├── database.py       # MongoDB connection
-│   ├── models.py         # Pydantic schemas
-│   ├── requirements.txt
-│   ├── routes/
-│   │   ├── user.py       # Register / Login
-│   │   └── files.py      # Upload / Share / Verify / Download / Revoke
-│   └── utils/
-│       ├── auth.py       # JWT + password hashing
-│       └── hashing.py    # SHA-256 helpers
-├── frontend/
-│   ├── src/
-│   │   ├── pages/        # Login, Register, Dashboard, Upload, Share, Verify, SharedFiles
-│   │   ├── components/   # Layout, Navbar, Sidebar, FileCard
-│   │   ├── services/     # api.js (Axios) + web3.js (Ethers)
-│   │   └── context/      # AuthContext (JWT + user state)
-│   └── vite.config.js
-└── contracts/
-    └── SecureFileShare.sol   # Solidity smart contract
-```
+Install these before starting:
+
+- [Node.js 18+](https://nodejs.org/)
+- [Python 3.9+](https://python.org/)
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) account (free tier)
 
 ---
 
-## ⚙️ Setup & Run
+## � First-Time Setup
 
-### 1. Clone the repository
+### 1. Install Hardhat (Blockchain)
 ```bash
-git clone https://github.com/Barathvs18/share_x.git
-cd share_x
+cd secure_share_x
+npm install
 ```
 
-### 2. Backend Setup
+### 2. Install Backend Dependencies
 ```bash
 cd backend
 python -m venv venv
-.\venv\Scripts\activate        # Windows
-# source venv/bin/activate     # Mac/Linux
-
+venv\Scripts\activate
 pip install -r requirements.txt
-
-# Create backend/.env with your credentials:
-# SECRET_KEY=your-secret-key
-# MONGO_URL=mongodb+srv://<user>:<password>@cluster.mongodb.net/?appName=Cluster0
-
-uvicorn main:app --reload
 ```
-Backend runs at: **http://localhost:8000**  
-Swagger Docs: **http://localhost:8000/docs**
 
-### 3. Frontend Setup
+### 3. Configure Environment
+```bash
+# Copy the example and fill in your values
+copy backend\.env.example backend\.env
+```
+
+Edit `backend\.env`:
+```env
+SECRET_KEY=any-random-long-string
+MONGO_URL=mongodb+srv://youruser:yourpass@cluster0.xxxxx.mongodb.net/
+```
+
+### 4. Install Frontend Dependencies
 ```bash
 cd frontend
 npm install
+```
+
+---
+
+## ▶️ Running the App
+
+Open **4 terminals** in order:
+
+### Terminal 1 — Blockchain Node
+```bash
+cd secure_share_x
+npx hardhat node
+```
+> Keep this open. Shows test accounts with free ETH.
+
+### Terminal 2 — Deploy Contract
+```bash
+cd secure_share_x
+npx hardhat run scripts/deploy.js --network localhost
+```
+> Copy the printed contract address, then paste it in `frontend/src/services/web3.js` line 13:
+> ```js
+> export const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+> ```
+
+### Terminal 3 — Backend
+```bash
+cd backend
+venv\Scripts\activate
+uvicorn main:app --reload
+```
+> Runs at http://localhost:8000
+> You should see: `✅ Successfully connected to MongoDB!`
+
+### Terminal 4 — Frontend
+```bash
+cd frontend
 npm run dev
 ```
-Frontend runs at: **http://localhost:3000**
+> Open http://localhost:5173 in your browser
 
 ---
 
-## 🔑 Environment Variables
+## � Using the App
 
-Create `backend/.env` (not committed — keep it secret):
-```env
-SECRET_KEY=your-very-long-random-secret-key
-MONGO_URL=mongodb+srv://username:password@cluster.mongodb.net/?appName=Cluster0
-```
-
----
-
-## 🚀 API Endpoints
-
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/api/users/register` | Register new user | ❌ |
-| POST | `/api/users/login` | Login + get JWT | ❌ |
-| POST | `/api/files/upload` | Upload & hash file | ✅ |
-| GET | `/api/files/myfiles` | List your uploads | ✅ |
-| GET | `/api/files/shared` | Files shared with you | ✅ |
-| POST | `/api/files/share` | Share file by email + expiry | ✅ |
-| POST | `/api/files/revoke` | Revoke file access | ✅ |
-| POST | `/api/files/verify` | Verify file integrity | ✅ |
-| GET | `/api/files/download/{id}` | Download file securely | ✅ |
+| Step | What to do |
+|---|---|
+| **Register** | Go to `/register` → create an account |
+| **Login** | Go to `/login` → sign in |
+| **Upload** | Sidebar → Upload → drag a file → click Upload & Anchor |
+| **Share** | Dashboard → click Share on a file → enter email + hours |
+| **Download** | Shared Files → Received tab → click Download |
+| **Revoke** | Shared Files → My Files tab → click Revoke next to a user |
+| **Verify** | Sidebar → Verify → enter file ID → Run Integrity Engine |
 
 ---
 
-## ⛓️ Blockchain (Optional)
+## ⚠️ Important Notes
 
-Deploy `contracts/SecureFileShare.sol` to Polygon/Mumbai testnet, then set `CONTRACT_ADDRESS` in `frontend/src/services/web3.js`. MetaMask required in browser.
+- **Restarted Hardhat node?** → Redeploy contract (Terminal 2) and update `CONTRACT_ADDRESS` again
+- **MongoDB error?** → Check internet connection and Atlas IP whitelist (`0.0.0.0/0`)
+- **Terminals 3 & 4** can be started in any order
 
 ---
 
-## 📄 License
+## �️ More Docs
 
-MIT
+| File | Contents |
+|---|---|
+| `PROJECT_GUIDE.md` | Full architecture, concepts, API reference |
+| `HARDHAT_MIGRATION.md` | Blockchain setup details, error fixes |

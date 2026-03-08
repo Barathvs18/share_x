@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, UploadCloud, Share2, ShieldCheck, LogOut, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, UploadCloud, Share2, ShieldCheck, LogOut, ChevronLeft, ChevronRight, Activity } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
 
@@ -12,6 +12,7 @@ const Sidebar = ({ isCollapsed, setCollapsed }) => {
         { path: '/upload', label: 'Upload File', icon: <UploadCloud size={20} /> },
         { path: '/shared', label: 'Shared Files', icon: <Share2 size={20} /> },
         { path: '/verify', label: 'Verify Integrity', icon: <ShieldCheck size={20} /> },
+        { path: '/activity', label: 'Activity Log', icon: <Activity size={20} /> },
     ];
 
     return (
