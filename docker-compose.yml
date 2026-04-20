@@ -1,32 +1,15 @@
 # ═══════════════════════════════════════════════════════════════
-#  Secure Share X — Docker Compose
+#  Secure Share X — Docker Compose (2-Layer Optimized)
 # ═══════════════════════════════════════════════════════════════
 #  Services:
-#    1. hardhat   → Local blockchain node  (port 8545)
-#    2. backend   → FastAPI + Uvicorn      (port 8000)
-#    3. frontend  → React + Vite dev       (port 3000)
+#    1. backend   → FastAPI + Hardhat Blockchain Combined (ports 8000, 8545)
+#    2. frontend  → React + Vite (port 3000)
 # ═══════════════════════════════════════════════════════════════
 
 version: "3.9"
 
 services:
-  # ── Hardhat Local Blockchain ─────────────────────────────────
-  hardhat:
-    build:
-      context: .
-      dockerfile: hardhat.Dockerfile
-    container_name: sharex-hardhat
-    ports:
-      - "8545:8545"
-    networks:
-      - sharex-net
-    healthcheck:
-      test: [ "CMD-SHELL", "wget -qO- http://0.0.0.0:8545 || exit 1" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  # ── FastAPI Backend ──────────────────────────────────────────
+  # ── Backend + Blockchain (Combined Layer) ────────────────────
   backend:
     build:
       context: ./backend
@@ -34,21 +17,19 @@ services:
     container_name: sharex-backend
     ports:
       - "8000:8000"
+      - "8545:8545"
     env_file:
       - ./backend/.env
     environment:
-      - HARDHAT_RPC_URL=http://hardhat:8545
+      - HARDHAT_RPC_URL=http://localhost:8545
     volumes:
       - ./backend:/app
       - backend-uploads:/app/uploads
-    depends_on:
-      hardhat:
-        condition: service_healthy
     networks:
       - sharex-net
     restart: unless-stopped
 
-  # ── React + Vite Frontend ───────────────────────────────────
+  # ── React Frontend (UI Layer) ───────────────────────────────
   frontend:
     build:
       context: ./frontend
@@ -73,7 +54,6 @@ services:
 
 volumes:
   backend-uploads:
-
 
 networks:
   sharex-net:
