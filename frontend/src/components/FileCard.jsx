@@ -130,13 +130,8 @@ const FileCard = ({ file, isShared, onShare, onVerify, onRevoke, onDeleted }) =>
                     {!isShared && (
                         <button
                             onClick={() => setShowConfirm(true)}
-                            className="btn btn-sm"
-                            style={{
-                                flex: 1,
-                                background: 'rgba(239, 68, 68, 0.12)',
-                                color: '#f87171',
-                                border: '1px solid rgba(239, 68, 68, 0.3)',
-                            }}
+                            className="btn btn-sm btn-danger"
+                            style={{ flex: 1 }}
                             title="Delete file permanently"
                         >
                             <Trash2 size={16} /> Delete
@@ -234,11 +229,10 @@ const FileCard = ({ file, isShared, onShare, onVerify, onRevoke, onDeleted }) =>
                                 <button
                                     onClick={handleDelete}
                                     disabled={deleting}
-                                    className="btn btn-sm"
+                                    className="btn btn-sm btn-danger"
                                     style={{
-                                        flex: 1, padding: '0.6rem',
-                                        background: '#ef4444', color: '#fff',
-                                        border: 'none', opacity: deleting ? 0.7 : 1,
+                                        flex: 2, padding: '0.6rem',
+                                        opacity: deleting ? 0.7 : 1,
                                     }}
                                 >
                                     {deleting ? <Loader size={16} className="animate-spin" /> : <Trash2 size={16} />}

@@ -137,13 +137,17 @@
 .btn-danger {
     background-color: rgba(239, 68, 68, 0.15);
     color: var(--danger);
-    border-color: rgba(239, 68, 68, 0.3);
+    border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .btn-danger:hover:not(:disabled) {
     background-color: var(--danger);
     color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
 }
+
+
 
 .btn-outline {
     background-color: transparent;

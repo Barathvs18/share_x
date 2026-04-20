@@ -1,0 +1,110 @@
+FAKE SERVICE AGREEMENT CONTRACT
+
+Agreement ID: SSA-2026-041
+
+This Service Agreement ("Agreement") is made on March 4, 2026.
+
+---
+
+PARTIES
+
+Party A (Client):
+Name: Mr. Arjun Raghavan
+Company: Alpha Solutions Pvt Ltd
+Address: 45 Innovation Street, T Nagar, Chennai, Tamil Nadu, India
+Email: [arjun.raghavan@alphasolutions.in](mailto:arjun.raghavan@alphasolutions.in)
+
+Party B (Service Provider):
+Name: Ms. Priya Sharma
+Company: Beta Technologies Pvt Ltd
+Address: 12 Tech Park Avenue, Whitefield, Bengaluru, Karnataka, India
+Email: [priya.sharma@betatech.in](mailto:priya.sharma@betatech.in)
+
+---
+
+1. PURPOSE
+
+This Agreement establishes the terms and conditions under which Beta Technologies Pvt Ltd will provide software development and technical consulting services to Alpha Solutions Pvt Ltd.
+
+---
+
+2. SCOPE OF WORK
+
+The Service Provider agrees to perform the following services:
+
+• Development of a secure web application
+• Implementation of file encryption and secure storage
+• Integration of blockchain-based verification system
+• Testing and deployment of the final system
+
+---
+
+3. CONTRACT PERIOD
+
+Start Date: March 4, 2026
+End Date: June 4, 2026
+
+The contract may be extended with mutual written agreement from both parties.
+
+---
+
+4. PAYMENT TERMS
+
+Total Contract Value: INR 150,000
+
+Payment Schedule:
+
+First Payment: INR 75,000 upon signing the agreement
+Final Payment: INR 75,000 upon successful completion and delivery of the project.
+
+Payments will be transferred to the Service Provider's registered bank account.
+
+---
+
+5. CONFIDENTIALITY
+
+Both parties agree to keep confidential any proprietary or sensitive information shared during the course of the project. This obligation will remain valid even after the termination of this agreement.
+
+---
+
+6. TERMINATION
+
+Either party may terminate this Agreement by giving a written notice of 14 days to the other party.
+
+---
+
+7. LIABILITY
+
+Neither party shall be liable for any failure to perform due to unforeseen circumstances including natural disasters, technical failures, cyber incidents, or government regulations.
+
+---
+
+8. GOVERNING LAW
+
+This Agreement shall be governed under the jurisdiction of the laws of India.
+
+---
+
+SIGNATURES
+
+Client Representative
+Name: Arjun Raghavan
+Signature: _______________________
+Date: ___________________________
+
+Service Provider Representative
+Name: Priya Sharma
+Signature: _______________________
+Date: ___________________________
+
+Witness 1
+Name: Rahul Verma
+Signature: _______________________
+
+Witness 2
+Name: Sneha Krishnan
+Signature: _______________________
+
+---
+
+End of Document

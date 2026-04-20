@@ -3,6 +3,7 @@ uvicorn
 motor
 pymongo
 python-jose[cryptography]
+bcrypt
 passlib[bcrypt]
 python-multipart
 web3

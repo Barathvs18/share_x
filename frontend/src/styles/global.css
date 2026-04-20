@@ -22,6 +22,24 @@
     --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
     --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.15);
+    
+    --glass-bg: rgba(30, 41, 59, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--bg-surface-light);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
 }
 
 * {
@@ -37,10 +55,12 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     background-image:
-        radial-gradient(at 0% 0%, rgba(15, 23, 42, 1) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(30, 41, 59, 0.8) 0px, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(30, 41, 59, 0.5) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(15, 23, 42, 1) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
     background-attachment: fixed;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 h1,

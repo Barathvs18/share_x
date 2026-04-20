@@ -23,5 +23,5 @@ RUN mkdir -p /app/uploads
 # Expose the FastAPI port
 EXPOSE 8000
 
-# Run with uvicorn
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Run with uvicorn (no --reload in production)
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

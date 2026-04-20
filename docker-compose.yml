@@ -53,11 +53,15 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://13.60.44.227:8000
+        - VITE_RPC_URL=http://13.60.44.227:8545
     container_name: sharex-frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     environment:
-      - VITE_API_URL=http://backend:8000
+      - VITE_API_URL=http://13.60.44.227:8000
+      - VITE_RPC_URL=http://13.60.44.227:8545
     volumes:
       - ./frontend:/app
       - /app/node_modules

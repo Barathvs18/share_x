@@ -1,5 +1,5 @@
-# ─── Frontend: React + Vite (Dev Mode) ─────────────────────────
-FROM node:18-alpine
+# ─── Stage 1: Build ───────────────────────────────────────────
+FROM node:18-alpine AS build
 
 # Set working directory
 WORKDIR /app
@@ -11,8 +11,27 @@ RUN npm ci
 # Copy the rest of the frontend source
 COPY . .
 
-# Expose the Vite dev server port
-EXPOSE 3000
+# Build arguments for environment variables (Vite needs these at build time)
+ARG VITE_API_URL
+ARG VITE_RPC_URL
+ENV VITE_API_URL=$VITE_API_URL
+ENV VITE_RPC_URL=$VITE_RPC_URL
 
-# Run Vite dev server
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+# Build the production bundle
+RUN npm run build
+
+# ─── Stage 2: Serve with Nginx ────────────────────────────────
+FROM nginx:stable-alpine
+
+# Copy the build output from Stage 1
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Copy custom nginx config for SPA routing
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Run Nginx
+CMD ["nginx", "-g", "daemon off;"]
+
