@@ -283,3 +283,28 @@
     opacity: 0.5;
     margin-bottom: 1rem;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .file-actions {
+        flex-wrap: wrap;
+    }
+    
+    .file-actions .btn {
+        flex: 1 1 calc(50% - 0.75rem) !important;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .dropzone {
+        padding: 2rem 1rem;
+    }
+}
